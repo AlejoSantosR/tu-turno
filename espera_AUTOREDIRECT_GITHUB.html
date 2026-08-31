@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101126" id="themeColor">
+<title>Amor · Ahora toca esperar ⭐</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#101126;--bg2:#17102d;--cream:#fff9ef;--muted:rgba(255,249,239,.72);
+  --pink:#ff5d9e;--yellow:#ffd166;--aqua:#76e7dc;--violet:#9b7bff;
+  --line:rgba(255,255,255,.14);--glass:rgba(255,255,255,.075);
+  --shadow:0 28px 70px rgba(0,0,0,.32);--safe:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg)}
+body{
+  color:var(--cream);font-family:'DM Sans',system-ui,sans-serif;overflow-x:hidden;
+  min-height:100svh;transition:background .8s ease;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(155,123,255,.28),transparent 38%),
+    radial-gradient(circle at 92% 70%,rgba(118,231,220,.09),transparent 32%),
+    linear-gradient(180deg,#101126 0%,#17102d 55%,#09081c 100%);
+}
+body.morning{
+  background:radial-gradient(circle at 80% 0%,rgba(255,209,102,.38),transparent 30%),
+  linear-gradient(160deg,#f2a1a8,#665a9c 52%,#17102d 100%);
+}
+body.afternoon{
+  background:radial-gradient(circle at 15% 10%,rgba(255,209,102,.2),transparent 32%),
+  linear-gradient(160deg,#7146b8,#2d235c 65%,#101126);
+}
+body.night{
+  background:radial-gradient(circle at 70% 0%,rgba(118,231,220,.10),transparent 32%),
+  radial-gradient(circle at 20% 30%,rgba(155,123,255,.20),transparent 35%),
+  linear-gradient(180deg,#101126,#17102d 58%,#09081c);
+}
+button,a{font:inherit}
+.stars{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.star-dot{position:absolute;width:3px;height:3px;background:white;border-radius:50%;opacity:.25;animation:twinkle var(--d,4s) ease-in-out infinite;animation-delay:var(--delay,0s)}
+@keyframes twinkle{0%,100%{opacity:.12;transform:scale(.7)}50%{opacity:.8;transform:scale(1.5)}}
+.top{
+  position:fixed;z-index:30;left:10px;right:10px;top:10px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:rgba(10,9,28,.55);border:1px solid var(--line);backdrop-filter:blur(18px);
+  border-radius:18px;padding:10px 12px;box-shadow:0 12px 28px rgba(0,0,0,.18)
+}
+.daypart{display:flex;align-items:center;gap:9px}.daypart .icon{font-size:1.25rem}
+.daypart strong{display:block;font-size:.82rem}.daypart span{display:block;color:var(--muted);font-size:.68rem}
+.status{font-size:.68rem;color:var(--muted);display:flex;align-items:center;gap:7px}
+.live{width:8px;height:8px;border-radius:50%;background:var(--aqua);box-shadow:0 0 0 0 rgba(118,231,220,.5);animation:ping 1.8s infinite}
+@keyframes ping{60%{box-shadow:0 0 0 8px rgba(118,231,220,0)}}
+main{min-height:100svh;display:grid;place-items:center;padding:100px 16px calc(42px + var(--safe));position:relative}
+.shell{width:min(620px,100%);text-align:center;position:relative;z-index:2}
+.star{font-size:clamp(4rem,18vw,7rem);filter:drop-shadow(0 0 28px rgba(255,209,102,.28));animation:float 3.4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px) rotate(4deg)}}
+.kicker{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:800;margin-top:6px}
+h1{font-family:'Fredoka';font-size:clamp(2.2rem,10vw,4.1rem);line-height:1.02;margin:12px 0 10px}
+.copy{color:var(--muted);max-width:520px;margin:0 auto 20px;line-height:1.7}
+.card{
+  background:var(--glass);border:1px solid var(--line);border-radius:30px;padding:22px;
+  backdrop-filter:blur(18px);box-shadow:var(--shadow);position:relative;overflow:hidden
+}
+.card:before,.card:after{content:'';position:absolute;width:30px;height:30px;border-radius:50%;background:rgba(9,8,28,.9);top:51%}
+.card:before{left:-16px}.card:after{right:-16px}
+.ticket{display:inline-block;font-family:monospace;color:var(--yellow);border:1px dashed rgba(255,209,102,.5);border-radius:9px;padding:6px 9px;font-size:.76rem}
+.count{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0 10px}
+.unit{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:15px 4px}
+.unit b{font-family:'Fredoka';display:block;font-size:clamp(1.7rem,9vw,3rem);line-height:1;color:var(--yellow)}
+.unit span{display:block;margin-top:6px;color:var(--muted);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase}
+.target{color:var(--muted);font-size:.82rem;line-height:1.55;margin-top:13px}
+.target strong{color:var(--cream)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+.btn{
+  border:0;border-radius:999px;padding:13px 18px;font-weight:800;cursor:pointer;
+  transition:.18s ease;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px
+}
+.btn:active{transform:scale(.96)}
+.primary{background:var(--pink);color:white}
+.ghost{background:rgba(255,255,255,.07);color:white;border:1px solid var(--line)}
+.note{margin-top:13px;font-size:.7rem;color:rgba(255,255,255,.48);line-height:1.55}
+.unlock{
+  display:none;margin-top:18px;padding:20px;border-radius:22px;
+  background:linear-gradient(135deg,rgba(255,209,102,.18),rgba(255,93,158,.14));
+  border:1px solid rgba(255,209,102,.36)
+}
+.unlock.show{display:block;animation:unlock .7s cubic-bezier(.2,.8,.2,1)}
+@keyframes unlock{from{opacity:0;transform:translateY(16px) scale(.97)}}
+.unlock h2{font-family:'Fredoka';font-size:1.7rem;margin:0 0 8px}
+.unlock p{color:var(--muted);line-height:1.6;margin:0 0 16px}
+.enter{background:var(--yellow);color:#17102d;box-shadow:0 12px 28px rgba(255,209,102,.22)}
+.toast{
+  position:fixed;z-index:100;left:50%;bottom:calc(22px + var(--safe));
+  transform:translate(-50%,120px);opacity:0;transition:.35s;
+  background:var(--cream);color:#231c45;border-radius:15px;padding:12px 15px;
+  font-weight:800;font-size:.78rem;max-width:calc(100% - 30px);text-align:center
+}
+.toast.show{transform:translate(-50%,0);opacity:1}
+@media(max-width:430px){.status{display:none}.card{padding:17px}.count{gap:6px}.unit{padding:14px 2px}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body class="night">
+<div class="stars" id="stars"></div>
+
+<div class="top">
+  <div class="daypart">
+    <span class="icon" id="timeIcon">🌙</span>
+    <div><strong id="daypart">Buenas noches, Amor</strong><span id="clock">—</span></div>
+  </div>
+  <div class="status"><i class="live"></i> sincronizado con este dispositivo</div>
+</div>
+
+<main>
+  <div class="shell">
+    <div class="star">⭐</div>
+    <div class="kicker" id="kicker">Reto aceptado · fila cerrada</div>
+    <h1 id="title">Ahora sí, Amor.<br>Te toca esperar.</h1>
+    <p class="copy" id="copy">La primera parte ya terminó. Tu respuesta quedó guardada en este navegador y, desde ahora, esta puerta permanece cerrada hasta que llegue el momento.</p>
+
+    <div class="card">
+      <span class="ticket">AMOR-0809</span>
+
+      <div id="waiting">
+        <div class="count">
+          <div class="unit"><b id="days">00</b><span>días</span></div>
+          <div class="unit"><b id="hours">00</b><span>horas</span></div>
+          <div class="unit"><b id="minutes">00</b><span>min</span></div>
+          <div class="unit"><b id="seconds">00</b><span>seg</span></div>
+        </div>
+
+        <div class="target">Esta puerta se abre el <strong>sábado 5 de septiembre de 2026 · 9:00 a. m. (Colombia)</strong> usando la hora de este dispositivo.</div>
+
+        <div class="actions">
+          <button class="btn primary" onclick="requestNotify()">🔔 Activar avisos</button>
+          <button class="btn ghost" onclick="shareAcceptance()">📨 Enviar mi confirmación</button>
+        </div>
+
+        <div class="note" id="notifyNote">Los avisos funcionan mientras esta página esté abierta. Un push real con la página totalmente cerrada requiere una configuración adicional de Web Push.</div>
+      </div>
+
+      <div class="unlock" id="unlock">
+        <h2>✨ Tu turno llegó.</h2>
+        <p>La espera terminó. El capítulo que estaba cerrado ya está listo para ti. Se abrirá automáticamente en unos segundos.</p>
+        <a class="btn enter" id="enterFinal" href="https://alejosantosr.github.io/para-ti-08/" rel="noopener">Abrir la sorpresa →</a>
+      </div>
+    </div>
+
+    <div class="note">Mientras no borres los datos de este sitio, este navegador recordará que ya aceptaste el reto y te traerá directamente a esta espera.</div>
+  </div>
+</main>
+
+<div class="toast" id="toast">Listo ✨</div>
+
+<script>
+const TARGET_DATE = new Date('2026-09-05T09:00:00-05:00');
+const FINAL_URL = 'https://alejosantosr.github.io/para-ti-08/';
+const ACCEPT_KEY = 'amorAccepted';
+const OPENED_KEY = 'amorOpenedFinal';
+const $ = id => document.getElementById(id);
+let notifyEnabled = localStorage.getItem('amorNotify') === '1';
+
+function pad(n){return String(n).padStart(2,'0')}
+
+function toast(msg){
+  const t=$('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(window.__toast);
+  window.__toast=setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+function setDayPart(){
+  const now=new Date(), h=now.getHours();
+  let mode='night', text='Buenas noches, Amor', icon='🌙';
+  if(h>=5 && h<12){mode='morning';text='Buenos días, Amor';icon='🌤️'}
+  else if(h>=12 && h<19){mode='afternoon';text='Buenas tardes, Amor';icon='☀️'}
+
+  document.body.classList.remove('morning','afternoon','night');
+  document.body.classList.add(mode);
+  $('daypart').textContent=text;$('timeIcon').textContent=icon;
+
+  const formatted=new Intl.DateTimeFormat('es-CO',{
+    weekday:'short',day:'2-digit',month:'short',
+    hour:'2-digit',minute:'2-digit',second:'2-digit'
+  }).format(now);
+  $('clock').textContent=formatted.replace(',',' ·');
+
+  const colors={morning:'#7966a5',afternoon:'#7146b8',night:'#101126'};
+  $('themeColor').setAttribute('content',colors[mode]);
+}
+
+function updateCountdown(){
+  const now=new Date();
+  let ms=TARGET_DATE-now;
+
+  if(ms<=0){
+    ['days','hours','minutes','seconds'].forEach(id=>$(id).textContent='00');
+    $('waiting').style.display='none';
+    $('unlock').classList.add('show');
+    $('kicker').textContent='00 · tu turno llegó';
+    $('title').innerHTML='La espera terminó.<br>La puerta ya es tuya.';
+    $('copy').textContent='Cumpliste el reto de esperar. La sorpresa se abrirá automáticamente en 5 segundos.';
+    maybeNotify('arrival','✨ Amor: tu turno llegó','La puerta ya está abierta.');
+
+    // Marca que el capítulo final quedó habilitado.
+    localStorage.setItem(OPENED_KEY,'1');
+
+    // Redirección automática. Se agenda una sola vez aunque el contador siga ejecutándose.
+    if(!window.__amorRedirectScheduled){
+      window.__amorRedirectScheduled = true;
+      let remaining = 5;
+      const original = $('enterFinal').textContent;
+      $('enterFinal').textContent = `Abrir ahora · ${remaining}s →`;
+
+      const visualTimer = setInterval(()=>{
+        remaining--;
+        if(remaining > 0){
+          $('enterFinal').textContent = `Abrir ahora · ${remaining}s →`;
+        }else{
+          clearInterval(visualTimer);
+          $('enterFinal').textContent = original;
+        }
+      },1000);
+
+      setTimeout(()=>{
+        window.location.replace(FINAL_URL);
+      },5000);
+    }
+    return;
+  }
+
+  const d=Math.floor(ms/86400000);ms%=86400000;
+  const h=Math.floor(ms/3600000);ms%=3600000;
+  const m=Math.floor(ms/60000);const s=Math.floor((ms%60000)/1000);
+
+  $('days').textContent=pad(d);$('hours').textContent=pad(h);
+  $('minutes').textContent=pad(m);$('seconds').textContent=pad(s);
+
+  const rem=TARGET_DATE-now;
+  if(rem<=10*60*1000) maybeNotify('10m','⏳ Falta muy poquito','Tu turno está a menos de 10 minutos.');
+  else if(rem<=60*60*1000) maybeNotify('1h','⭐ Tu turno se acerca','Falta menos de una hora.');
+  else if(rem<=6*60*60*1000) maybeNotify('6h','✨ Hoy empieza algo','Faltan menos de 6 horas.');
+  else if(rem<=24*60*60*1000) maybeNotify('24h','💜 Mañana cambia todo','Falta menos de un día para tu turno.');
+}
+
+function maybeNotify(key,title,body){
+  if(!notifyEnabled)return;
+  const keyName='amorNotify_'+key;
+  if(localStorage.getItem(keyName)==='1')return;
+  localStorage.setItem(keyName,'1');
+  toast(title+' · '+body);
+  if(navigator.vibrate)navigator.vibrate([120,60,120]);
+  if('Notification' in window && Notification.permission==='granted'){
+    try{new Notification(title,{body,tag:'amor-'+key})}catch(e){}
+  }
+}
+
+async function requestNotify(){
+  if(!('Notification' in window)){
+    notifyEnabled=true;localStorage.setItem('amorNotify','1');
+    $('notifyNote').textContent='Este navegador no permite notificaciones web desde esta vista. Dejé activos los avisos dentro de la página.';
+    toast('Avisos en pantalla activados ✨');return;
+  }
+  try{
+    const permission=await Notification.requestPermission();
+    if(permission==='granted'){
+      notifyEnabled=true;localStorage.setItem('amorNotify','1');
+      $('notifyNote').textContent='Avisos activados. Mientras esta página permanezca abierta, te avisará cuando falte poco.';
+      toast('Notificaciones activadas 🔔');
+      try{new Notification('✨ Sala de espera activada',{body:'Te avisaré cuando tu turno esté cerca.'})}catch(e){}
+    }else{
+      $('notifyNote').textContent='No se concedió permiso. Igual tendrás avisos visuales dentro de la página.';
+    }
+  }catch(e){toast('No pude activar el aviso del navegador.');}
+}
+
+async function shareAcceptance(){
+  const text='Acepto el reto ✨ Ahora me toca esperar. 💜';
+  if(navigator.share){
+    try{await navigator.share({title:'Reto aceptado',text});return}catch(e){}
+  }
+  try{await navigator.clipboard.writeText(text);toast('Confirmación copiada 💜')}
+  catch(e){toast(text)}
+}
+
+function buildStars(){
+  const box=$('stars');
+  for(let i=0;i<52;i++){
+    const s=document.createElement('i');s.className='star-dot';
+    s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';
+    s.style.setProperty('--d',(2.5+Math.random()*4)+'s');
+    s.style.setProperty('--delay',(-Math.random()*4)+'s');
+    box.appendChild(s);
+  }
+}
+
+// No se puede entrar a esta segunda etapa sin haber aceptado la primera.
+if(localStorage.getItem(ACCEPT_KEY)!=='1'){
+  window.location.replace('./');
+}else{
+  $('enterFinal').addEventListener('click',(e)=>{
+    localStorage.setItem(OPENED_KEY,'1');
+    // El href ya apunta a la sorpresa final; este botón queda como respaldo
+    // por si el navegador bloquea o interrumpe la redirección automática.
+  });
+  buildStars();setDayPart();updateCountdown();
+  setInterval(setDayPart,1000);setInterval(updateCountdown,1000);
+}
+</script>
+</body>
+</html>
