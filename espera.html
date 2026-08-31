@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Conectando… ✨</title>
+<style>html,body{height:100%;margin:0}body{display:grid;place-items:center;background:#171331;color:#fff9ef;font-family:system-ui,sans-serif}.box{text-align:center;padding:28px}.star{font-size:3rem;animation:p 1s ease-in-out infinite alternate}@keyframes p{to{transform:scale(1.18);filter:drop-shadow(0 0 18px #ffd166)}}p{opacity:.75}</style>
+</head>
+<body><div class="box"><div class="star">⭐</div><p>Preparando tu siguiente capítulo…</p></div>
+<script>
+const WAITING_URL='https://alejosantosr.github.io/tu-turno1/';
+const TEST_HASH='bd1b7264b81229a85f1ded01863b5a3f54af62898e308329467bee928245658f';
+async function sha256(text){
+  const data=new TextEncoder().encode(text);
+  const digest=await crypto.subtle.digest('SHA-256',data);
+  return Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+(async()=>{
+  let candidate=new URL(location.href).searchParams.get('prueba')||'';
+  if(!candidate && document.referrer){
+    try{candidate=new URL(document.referrer).searchParams.get('prueba')||''}catch(e){}
+  }
+  let isTest=false;
+  try{isTest=candidate && (await sha256(candidate.trim().toLowerCase()))===TEST_HASH}catch(e){}
+  if(isTest){
+    sessionStorage.setItem('amorTestMode','1');
+    sessionStorage.removeItem('amorTestTarget');
+    localStorage.removeItem('amorAccepted');
+    localStorage.removeItem('amorAcceptedAt');
+  }
+  location.replace(WAITING_URL);
+})();
+</script></body></html>
