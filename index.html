@@ -45,6 +45,7 @@ h1,h2,h3{font-family:ui-rounded,"Arial Rounded MT Bold",system-ui,sans-serif}h1{
 <div class="btns"><button class="btn orange" onclick="go(1)">Subirme al tren 🚂</button><button class="btn ghost" onclick="toast('Tu estrella está más adelante. Primero hay unas estaciones que recorrer ⭐')">Preguntarle a mi estrella ⭐</button></div>
 <p class="small">No puedes saltarte estaciones. Cada parte se abre cuando terminas la anterior.</p>
 </div></div></section>
+
 <section class="page"><div class="scroll"><div class="wrap">
 <button class="btn ghost back" onclick="go(0)">← Volver</button>
 <span class="tag">01 · Tu historia</span><h2>Había una vez un niño muy valiente.</h2>
@@ -60,6 +61,7 @@ h1,h2,h3{font-family:ui-rounded,"Arial Rounded MT Bold",system-ui,sans-serif}h1{
 <div class="end">Llegaste al final de esta estación. Ahora sí puedes continuar. 🚂</div>
 <div class="btns"><button class="btn orange" onclick="go(2)">Ir a mi estrella ⭐</button></div>
 </div></div></section>
+
 <section class="page"><div class="scroll"><div class="wrap center">
 <button class="btn ghost back" onclick="go(1)">← Volver</button>
 <span class="tag">02 · Tu estrellita</span><h2>Hay cosas que quizá necesitas recordar.</h2>
@@ -69,6 +71,7 @@ h1,h2,h3{font-family:ui-rounded,"Arial Rounded MT Bold",system-ui,sans-serif}h1{
 <div class="meter"><div class="meterline"><div class="meterfill" id="fill"></div></div><div class="small" id="starStatus">0 de 3 mensajes necesarios</div></div>
 <div class="btns"><button class="btn orange" id="nextStar" disabled onclick="go(3)">Continuar al reto →</button></div>
 </div></div></section>
+
 <section class="page"><div class="scroll"><div class="wrap">
 <button class="btn ghost back" onclick="go(2)">← Volver</button>
 <div class="challenge"><span class="tag">03 · El reto</span><h2>¿Te animas a abrir el siguiente capítulo?</h2>
@@ -81,7 +84,18 @@ h1,h2,h3{font-family:ui-rounded,"Arial Rounded MT Bold",system-ui,sans-serif}h1{
 <script>
 const A='amorAccepted',AT='amorAcceptedAt',TEST='amorTestMode',HASH='bd1b7264b81229a85f1ded01863b5a3f54af62898e308329467bee928245658f';
 let page=0,touches=0,mi=-1;const qs=s=>document.querySelector(s),qsa=s=>document.querySelectorAll(s);
-const msgs=['Has logrado muchísimo de lo que alguna vez te propusiste. <strong>Míralo, celébralo y disfrútalo.</strong>','Eres alguien en la vida por la forma en que <strong>impactas, acompañas y te entregas</strong>, no solo por tus títulos o metas.','Eres una persona amada. Incluso cuando no te lo digan todos los días, <strong>hay cariño real alrededor de ti</strong>.','Tienes una forma muy tuya de apoyar. Estar, escuchar y acompañar también es <strong>hacerle bien a alguien</strong>.','Eres valioso por lo que haces, pero todavía más por <strong>quien eres cuando nadie está mirando</strong>.','Tu ternura no te hace menos fuerte. Te hace alguien capaz de <strong>querer con verdad</strong>.','Tu carisma conecta personas y deja recuerdos. <strong>Tu manera de ser se nota.</strong>','Día a día intentas dar lo mejor de ti. Que no todo salga perfecto no borra <strong>todo lo que sí haces bien</strong>.','Se nota cuando amas lo que haces, tus proyectos, tus viajes y lo que todavía quieres construir. <strong>No pierdas esa emoción.</strong>','No vivas corriendo hacia la próxima meta. A veces también toca detenerse y decir: <strong>lo logré, estoy aquí y voy a disfrutarlo.</strong> 🧡'];
+const msgs=[
+'Has logrado muchísimo de lo que alguna vez te propusiste. <strong>Míralo, celébralo y disfrútalo.</strong>',
+'Eres alguien en la vida por la forma en que <strong>impactas, acompañas y te entregas</strong>, no solo por tus títulos o metas.',
+'Eres una persona amada. Incluso cuando no te lo digan todos los días, <strong>hay cariño real alrededor de ti</strong>.',
+'Tienes una forma muy tuya de apoyar. Estar, escuchar y acompañar también es <strong>hacerle bien a alguien</strong>.',
+'Eres valioso por lo que haces, pero todavía más por <strong>quien eres cuando nadie está mirando</strong>.',
+'Tu ternura no te hace menos fuerte. Te hace alguien capaz de <strong>querer con verdad</strong>.',
+'Tu carisma conecta personas y deja recuerdos. <strong>Tu manera de ser se nota.</strong>',
+'Día a día intentas dar lo mejor de ti. Que no todo salga perfecto no borra <strong>todo lo que sí haces bien</strong>.',
+'Se nota cuando amas lo que haces, tus proyectos, tus viajes y lo que todavía quieres construir. <strong>No pierdas esa emoción.</strong>',
+'No vivas corriendo hacia la próxima meta. A veces también toca detenerse y decir: <strong>lo logré, estoy aquí y voy a disfrutarlo.</strong> 🧡'
+];
 function toast(t){const x=qs('#toast');x.textContent=t;x.classList.add('on');clearTimeout(window.tt);window.tt=setTimeout(()=>x.classList.remove('on'),2600)}
 function go(n){if(n===3&&touches<3)return toast('Primero escucha tres mensajes de tu estrella ⭐');page=Math.max(0,Math.min(3,n));qsa('.page').forEach((x,i)=>x.classList.toggle('on',i===page));qs('#bar').style.width=((page+1)*25)+'%';qs('#step').textContent='Estación '+(page+1)+' de 4';const s=qs('.page.on .scroll');if(s)s.scrollTop=0}
 function touch(){mi=(mi+1)%msgs.length;touches++;qs('#msg').innerHTML=msgs[mi];let n=Math.min(touches,3);qs('#fill').style.width=(n/3*100)+'%';qs('#starStatus').textContent=n+' de 3 mensajes necesarios';if(touches>=3){qs('#nextStar').disabled=false;qs('#starStatus').textContent='Listo · siguiente estación abierta ✨'}if(qs('#star').animate)qs('#star').animate([{transform:'scale(1)'},{transform:'scale(1.3) rotate(15deg)'},{transform:'scale(1)'}],{duration:450});}
@@ -91,6 +105,6 @@ async function accept(){let raw=qs('#answer').value.trim(),v=raw.toLowerCase();t
 function hello(){let h=new Date().getHours(),t=h<12&&h>=5?'Buenos días, Amor 🌤️':h<19&&h>=12?'Buenas tardes, Amor ☀️':'Buenas noches, Amor 🌙';qs('#hello').textContent=t}
 function deco(){let b=qs('#bg');for(let i=0;i<50;i++){let x=document.createElement('i');x.className='dot';x.style.left=Math.random()*100+'%';x.style.top=Math.random()*100+'%';x.style.animationDelay=(-Math.random()*3)+'s';b.appendChild(x)}let c=qs('#chaos'),e=['🎟️','✨','🧡','💙','🚦','🚉','🧳','🐶','🐥','⭐'];for(let i=0;i<18;i++){let x=document.createElement('span');x.className='float';x.textContent=e[Math.floor(Math.random()*e.length)];x.style.left=(3+Math.random()*91)+'%';x.style.top=(10+Math.random()*60)+'%';x.style.setProperty('--d',(2.5+Math.random()*4)+'s');x.style.setProperty('--x',((Math.random()-.5)*50)+'px');x.style.setProperty('--y',(-10-Math.random()*35)+'px');x.style.setProperty('--r',((Math.random()-.5)*40)+'deg');x.style.animationDelay=(-Math.random()*4)+'s';c.appendChild(x)}}
 document.addEventListener('wheel',e=>{if(!e.target.closest('.scroll'))e.preventDefault()},{passive:false});document.addEventListener('touchmove',e=>{if(!e.target.closest('.scroll'))e.preventDefault()},{passive:false});
-deco();hello();setInterval(hello,60000);go(0);if(localStorage.getItem(A)==='1')bridge();
+deco();hello();setInterval(hello,60000);go(0);
 </script>
 </body></html>
